@@ -1,0 +1,12 @@
+.heading_style {
+    color: rgb(47, 189, 255);
+    background-color: rgb(184, 86, 184);
+    display: inline;
+}
+.rectangle {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(184, 86, 137);
+    margin-left: 50px;
+    padding-right: 100px;
+}
