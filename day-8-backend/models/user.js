@@ -7,9 +7,12 @@ const user=new mongoose.Schema({
     },
     lastName:{
         type:String,
+        required:true
     },
     mobileNumber:{
-        type:Number
+        type:Number,
+        required:true,
+        unique:true
     },
     email:{
         type:String,
@@ -21,5 +24,9 @@ const user=new mongoose.Schema({
         required:true
     }
 });
+
+// Ensure unique indexes on email and mobileNumber
+user.index({ email: 1 }, { unique: true });
+user.index({ mobileNumber: 1 }, { unique: true });
 
 module.exports = mongoose.model('User', user);

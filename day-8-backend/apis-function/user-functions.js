@@ -1,4 +1,13 @@
 const User = require("../models/user");
+
+// Helper to format duplicate key errors nicely
+const formatDuplicateError = (err) => {
+  if (err && err.code === 11000 && err.keyPattern) {
+    const fields = Object.keys(err.keyPattern).join(", ");
+    return `Duplicate value for field(s): ${fields}`;
+  }
+  return err.message;
+};
 // Create single user
 exports.createUser = async (req, res) => {
   try {
@@ -18,7 +27,7 @@ exports.createUser = async (req, res) => {
   } catch (e) {
     res.status(400).json({
       success: false,
-      error: e.message,
+      error: formatDuplicateError(e),
     });
   }
 };
@@ -41,7 +50,7 @@ exports.insertManyUsers = async (req, res) => {
   } catch (e) {
     res.status(400).json({
       success: false,
-      error: e.message,
+      error: formatDuplicateError(e),
     });
   }
 };
